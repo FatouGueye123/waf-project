@@ -60,11 +60,11 @@ Testé directement en curl sur le proxy, avec PARANOIA=2 :
 
 Donc : 100% des attaques testées bloquées, et le trafic légitime continue de passer normalement. C'est le résultat qu'on veut voir.
 
-![Test SQLi bloqué](docs/screenshots/06-test1-sqli-bloque-403.png)
+![Test SQLi bloqué](docs/screenshots/screenshots/06-test1-sqli-bloque-403.png)
 
 Et pour prouver que c'est vraiment le WAF qui bloque tout ça (pas autre chose), je l'ai désactivé temporairement et rejoué les mêmes tests : les quatre attaques passent alors en 200 OK, sans aucune résistance.
 
-![Sans WAF, l'injection SQL passe](docs/screenshots/12-sans-waf-sqli-passe-200.png)
+![Sans WAF, l'injection SQL passe](docs/screenshots/screenshots/12-sans-waf-sqli-passe-200.png)
 
 ## Et le niveau de paranoïa, ça change quoi ?
 
@@ -79,7 +79,7 @@ Le WAF a 4 niveaux de sensibilité, et plus on monte, plus il détecte de choses
 
 À PARANOIA=4, une simple apostrophe dans "l'orange" fait planter la requête (500), et une requête POST JSON parfaitement valide peut être coupée. C'est un bon exemple concret de pourquoi il ne faut pas mettre le niveau au max juste parce qu'on peut : PARANOIA=2 reste le meilleur compromis entre sécurité et utilisabilité.
 
-![Faux positifs à PARANOIA=4](docs/screenshots/20-passage-paranoia4-et-faux-positifs.png)
+![Faux positifs à PARANOIA=4](docs/screenshots/screenshots/20-passage-paranoia4-et-faux-positifs.png)
 
 ## Le reste de la protection
 
