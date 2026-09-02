@@ -1,0 +1,48 @@
+services:
+
+  juiceshop:
+    image: bkimminich/juice-shop
+    container_name: juiceshop
+    restart: always
+    networks:
+      - waf-net
+
+  nginx-waf:
+    image: owasp/modsecurity-crs:nginx-alpine
+    container_name: nginx-waf
+    ports:
+      - "80:8080"
+      - "443:8443"
+    environment:
+      - BACKEND=http://juiceshop:3000
+      - PORT=8080
+      - PARANOIA=2
+      - ANOMALY_INBOUND=5
+      - ANOMALY_OUTBOUND=4
+    depends_on:
+      - juiceshop
+    volumes:
+      - ./custom-headers.conf:/etc/nginx/conf.d/custom-headers.conf:ro
+      - ./rate-limit-zone.conf:/etc/nginx/conf.d/rate-limit-zone.conf:ro
+      - nginx-waf-logs:/var/log/nginx-waf 
+    networks:
+      - waf-net
+
+  fail2ban:
+    image: crazymax/fail2ban:latest
+    container_name: fail2ban
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./fail2ban/jail.d:/data/jail.d
+      - ./fail2ban/filter.d:/data/filter.d
+      - nginx-waf-logs:/var/log/nginx-waf
+
+networks:
+  waf-net:
+    driver: bridge
+
+volumes:
+  nginx-waf-logs:  

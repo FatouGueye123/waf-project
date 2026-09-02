@@ -1,0 +1,34 @@
+# --- Certificats et secrets ---
+*.crt
+*.key
+*.pem
+*.pfx
+.env
+.env.*
+
+# --- Logs ---
+*.log
+logs/
+fail2ban/logs/
+nginx-waf/logs/
+
+# --- Docker ---
+*.pid
+
+# --- Résultats de scans (peuvent contenir des infos sensibles / volumineux) ---
+nmap_*.txt
+zap_*.html
+*.session
+
+# --- Système ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Éditeurs ---
+.vscode/
+.idea/
+*.swp
+
+# --- Node (si jamais utilisé pour un script du projet) ---
+node_modules/
