@@ -123,9 +123,3 @@ waf-project/
 │   └── screenshots/        # 36 captures, numérotées dans l'ordre chronologique
 └── .gitignore
 ```
-
-> Sur Windows, ce dossier correspond à `C:\waf-project`.
-
-## En une phrase pour le CV
-
-Sécurisation d'une application web par WAF (Nginx + ModSecurity + OWASP CRS) — architecture Docker, tests OWASP Top 10 (100% de détection), réduction de 92% de la surface d'attaque mesurée via OWASP ZAP, défense en profondeur (Fail2ban, rate limiting, HTTPS).
